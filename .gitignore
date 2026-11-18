@@ -1,0 +1,10 @@
+tt.*
+node_modules/
+nvim-data/
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data

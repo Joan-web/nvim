@@ -131,6 +131,14 @@ now_if_args(function()
 
   require('mason').setup()
 
+  -- Servers installed by Mason are not on the system PATH, so Neovim cannot
+  -- execute them by name. Adding their 'bin' directory here lets all language
+  -- servers (jdtls, lua_ls, etc.) start correctly.
+  local mason_bin = vim.fn.stdpath('data') .. '/mason/bin'
+  if not vim.env.PATH:find(mason_bin, 1, true) then
+    vim.env.PATH = mason_bin .. ':' .. vim.env.PATH
+  end
+
   -- Install language servers with Mason and enable them automatically with
   -- `:h vim.lsp.enable()` using the rules provided by 'nvim-lspconfig'.
   -- Use `:h vim.lsp.config()` or 'after/lsp/' directory to configure servers.
